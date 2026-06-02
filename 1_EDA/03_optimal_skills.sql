@@ -14,7 +14,7 @@ INNER JOIN skills_job_dim AS sjd
 INNER JOIN skills_dim AS sd 
     ON sjd.skill_id = sd.skill_id
 WHERE
-    jpf.job_title_short = 'Data Scientist'
+    jpf.job_title_short = 'Data Analyst'
     AND jpf.job_work_from_home = True
     AND jpf.salary_year_avg IS NOT NULL
 GROUP BY 
