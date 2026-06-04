@@ -109,3 +109,91 @@ WITH raw_skill_json AS(
 SELECT
     skill_struct.skill
 FROM struct_skill_json;
+
+
+
+
+----------case study ---------
+
+CREATE OR REPLACE TEMP TABLE skill_temp AS
+    SELECT
+        jpf.job_id,
+        jpf.job_title_short,
+        jpf.salary_year_avg,
+        ARRAY_AGG(sd.skills) AS skills_array
+    FROM job_postings_fact AS jpf
+    LEFT JOIN skills_job_dim AS sjd
+        ON jpf.job_id = sjd.job_id
+    LEFT JOIN skills_dim AS sd
+        ON sd.skill_id = sjd.skill_id
+    GROUP BY 
+        jpf.job_id,
+        jpf.job_title_short,
+        jpf.salary_year_avg;
+
+-- Analyse median salary per skill
+
+WITH t AS(
+    select
+        job_id,
+        job_title_short,
+        salary_year_avg,
+        unnest(skills_array) as unnest_skills
+    from skill_temp
+)
+
+SELECT 
+    unnest_skills,
+    median(NULLIF(salary_year_avg,0)) as median_salary
+from t
+group by unnest_skills
+having median(NULLIF(salary_year_avg,0)) is not null
+order by median_salary desc;
+
+
+
+
+
+-- Array Structs case study --
+
+create or replace temp table skill_array_struct as
+    SELECT
+        jpf.job_id,
+        jpf.job_title_short,
+        jpf.salary_year_avg,
+        array_agg(
+            struct_pack(
+                skill:= sd.skills,
+                type := sd.type
+            )
+        ) as skill_as
+    FROM job_postings_fact AS jpf
+    LEFT JOIN skills_job_dim AS sjd
+        ON jpf.job_id = sjd.job_id
+    LEFT JOIN skills_dim AS sd
+        ON sd.skill_id = sjd.skill_id
+    GROUP BY 
+        jpf.job_id,
+        jpf.job_title_short,
+        jpf.salary_year_avg;
+
+
+with t as(
+    select
+        job_id,
+        job_title_short,
+        salary_year_avg,
+        unnest(skill_as, recursive := true) as unnest_skills_as
+    from skill_array_struct
+)
+
+select
+    t.type,
+    median(NULLIF(salary_year_avg,0)) as median_salary
+from t
+group by t.type
+having median(NULLIF(salary_year_avg,0)) is not null
+order by median_salary desc
+limit 20;
+
+
