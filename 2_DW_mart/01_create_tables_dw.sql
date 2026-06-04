@@ -12,7 +12,7 @@ create or replace table company_dim (
 
 create or replace table skills_dim (
     skill_id    integer     primary key,
-    skill       varchar,
+    skills       varchar,
     type        varchar
 );
 
