@@ -4,7 +4,7 @@ drop schema if exists flat_mart cascade;
 
 create schema flat_mart;
 
-create or replace table flat_mart.t as
+create or replace table flat_mart.jobs_flat as
 select
     jpf.job_id                  ,
     jpf.company_id              ,
@@ -47,7 +47,7 @@ select * from information_schema.tables;
 
 -- Data validation
 
-select 'Flat Mart Job Postings' as table_name, count(*) as record_rows from flat_mart.t;
+select 'Flat Mart Job Postings' as table_name, count(*) as record_rows from flat_mart.jobs_flat;
 
 select '=== flat mart sample ===' as info;
-select * from flat_mart.t limit 5;
+select * from flat_mart.jobs_flat limit 5;
