@@ -45,7 +45,7 @@ UPDATE staging.preferred_roles
 SET preferred_role = False
 WHERE role_name NOT LIKE '%Data%';
 
---ALTER Name of Table/Column
+--ALTER Name/TYPE of Table/Column
 
 SELECT * FROM staging.priority_roles;
 
