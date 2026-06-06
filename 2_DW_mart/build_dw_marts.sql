@@ -25,3 +25,22 @@
 
 -- Step 7: Mart - Create company prospecting mart
 .read 07_create_company_marts.sql
+
+
+
+
+COPY flat_mart.jobs_flat
+TO 'C:/Users/KT/PowerBI/csvfiles/fm_jobs_flat.csv'
+(FORMAT CSV, HEADER TRUE, DELIMITER ',');
+
+COPY skill_mart.fact_skill_demand_monthly
+TO 'C:/Users/KT/PowerBI/csvfiles/sm_fact_skill_demand_monthly.csv'
+(FORMAT CSV, HEADER TRUE, DELIMITER ',');
+
+COPY skill_mart.dim_date_month
+TO 'C:/Users/KT/PowerBI/csvfiles/sm_dim_date_month.csv'
+(FORMAT CSV, HEADER TRUE, DELIMITER ',');
+
+COPY skill_mart.dim_skills
+TO 'C:/Users/KT/PowerBI/csvfiles/sm_dim_skills.csv'
+(FORMAT CSV, HEADER TRUE, DELIMITER ',');
