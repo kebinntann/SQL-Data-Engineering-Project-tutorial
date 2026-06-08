@@ -118,7 +118,7 @@ select
     sum(has_health_insurance) as health_insurance_postings_count,
     sum(no_degree_mentioned) as no_degree_mentioned_postings_count
 from t
-where job_title_short like '%Data Engineer%'
+where job_title_short like '%Data%'
 group by all
 order by skill_id, month_start_date, job_title_short;
 

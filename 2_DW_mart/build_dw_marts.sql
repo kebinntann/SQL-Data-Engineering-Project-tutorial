@@ -3,7 +3,7 @@
 
 
 
--- .read build_dw_marts.sql
+-- duckdb dw_marts.duckdb -c ".read build_dw_marts.sql"
 
 -- Step 1: DW - Create star schema tables
 .read 01_create_tables_dw.sql
@@ -30,17 +30,19 @@
 
 
 COPY flat_mart.jobs_flat
-TO 'C:/Users/KT/PowerBI/csvfiles/fm_jobs_flat.csv'
-(FORMAT CSV, HEADER TRUE, DELIMITER ',');
+TO 'C:/Users/KT/PowerBI/parquetfiles/fm_jobs_flat.parquet'
+(FORMAT parquet);
 
 COPY skill_mart.fact_skill_demand_monthly
-TO 'C:/Users/KT/PowerBI/csvfiles/sm_fact_skill_demand_monthly.csv'
-(FORMAT CSV, HEADER TRUE, DELIMITER ',');
+TO 'C:/Users/KT/PowerBI/parquetfiles/sm_fact_skill_demand_monthly.parquet'
+(FORMAT parquet);
 
 COPY skill_mart.dim_date_month
-TO 'C:/Users/KT/PowerBI/csvfiles/sm_dim_date_month.csv'
-(FORMAT CSV, HEADER TRUE, DELIMITER ',');
+TO 'C:/Users/KT/PowerBI/parquetfiles/sm_dim_date_month.parquet'
+(FORMAT parquet);
 
 COPY skill_mart.dim_skills
-TO 'C:/Users/KT/PowerBI/csvfiles/sm_dim_skills.csv'
-(FORMAT CSV, HEADER TRUE, DELIMITER ',');
+TO 'C:/Users/KT/PowerBI/parquetfiles/sm_dim_skills.parquet'
+(FORMAT parquet);
+
+select ' === finish ===' as completion_status;
