@@ -33,6 +33,8 @@ COPY flat_mart.jobs_flat
 TO 'C:/Users/KT/PowerBI/parquetfiles/fm_jobs_flat.parquet'
 (FORMAT parquet);
 
+--------------------------------------------------------
+
 COPY skill_mart.fact_skill_demand_monthly
 TO 'C:/Users/KT/PowerBI/parquetfiles/sm_fact_skill_demand_monthly.parquet'
 (FORMAT parquet);
@@ -43,6 +45,40 @@ TO 'C:/Users/KT/PowerBI/parquetfiles/sm_dim_date_month.parquet'
 
 COPY skill_mart.dim_skills
 TO 'C:/Users/KT/PowerBI/parquetfiles/sm_dim_skills.parquet'
+(FORMAT parquet);
+
+-----------------------------------------------------------------
+
+COPY company_mart.dim_job_title
+TO 'C:/Users/KT/PowerBI/parquetfiles/cm_dim_job_title.parquet'
+(FORMAT parquet);
+
+COPY company_mart.bridge_job_title
+TO 'C:/Users/KT/PowerBI/parquetfiles/cm_bridge_job_title.parquet'
+(FORMAT parquet);
+
+COPY company_mart.dim_job_title_short
+TO 'C:/Users/KT/PowerBI/parquetfiles/cm_dim_job_title_short.parquet'
+(FORMAT parquet);
+
+COPY company_mart.fact_company_hiring_month
+TO 'C:/Users/KT/PowerBI/parquetfiles/cm_fact_company_hiring_month.parquet'
+(FORMAT parquet);
+
+COPY company_mart.dim_date_month
+TO 'C:/Users/KT/PowerBI/parquetfiles/cm_dim_date_month.parquet'
+(FORMAT parquet);
+
+COPY company_mart.dim_location
+TO 'C:/Users/KT/PowerBI/parquetfiles/cm_dim_location.parquet'
+(FORMAT parquet);
+
+COPY company_mart.bridge_company_location
+TO 'C:/Users/KT/PowerBI/parquetfiles/cm_bridge_company_location.parquet'
+(FORMAT parquet);
+
+COPY company_mart.dim_company
+TO 'C:/Users/KT/PowerBI/parquetfiles/cm_dim_company.parquet'
 (FORMAT parquet);
 
 select ' === finish ===' as completion_status;
